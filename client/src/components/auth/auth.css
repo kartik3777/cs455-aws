@@ -1,0 +1,224 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.out-cont {
+    height: 100vh;
+    width: 100vw;
+    background-color: blueviolet;
+}
+
+.main-login {
+    width: 25%;
+    height: auto;
+    border: 2px solid rgb(255, 255, 255);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px 5px;
+    /* box-shadow: 5px 5px 40px rgb(174, 81, 255); */
+
+}
+
+.heading-login {
+    color: white;
+}
+
+.inside-box-2 {
+    width: 90%;
+    padding: 5px;
+}
+
+.input-field-login {
+    position: relative;
+    margin: 15px 0px;
+    color: white;
+}
+
+.input-field-login input {
+    width: 92%;
+    outline: none;
+    padding: 11px;
+    font-size: 17px;
+    background-color: transparent;
+    border: none;
+    border: 2px solid white;
+    border-radius: 5px;
+    color: white;
+}
+
+.input-field-login label {
+    position: absolute;
+    top: 50%;
+    left: 15px;
+    transform: translateY(-50%);
+    transition: all 300ms;
+    background: blueviolet;
+    cursor: text;
+
+}
+
+.input-field-login input:focus~label,
+.input-field-login input:valid~label {
+    top: 0px;
+    left: 14px;
+    font-size: 14px;
+}
+
+.inside-box {
+    width: 90%;
+}
+
+.inside-box h1 {
+    text-align: center;
+    margin: 8px;
+}
+
+.main-login a {
+    color: aqua;
+    font-size: 13px;
+}
+
+#login-btn {
+    border: none;
+    width: 100%;
+    padding: 8px 11px;
+    font-size: 20px;
+    cursor: pointer;
+    background-color: rgb(173, 101, 255);
+    color: white;
+}
+
+#login-btn:hover {
+    background-color: rgb(118, 9, 202);
+}
+
+.forgot {
+    width: 90%;
+    display: flex; 
+    justify-content: flex-end;
+    padding: 5px;
+}
+
+.inside-box p {
+    font-size: 15px;
+    color: rgb(233, 233, 233);
+}
+
+.inside-box span {
+    width: 100%;
+
+    font-size: 15px;
+    color: rgb(20, 4, 39);
+    text-align: center;
+}
+
+.login-icons {
+    display: flex;
+}
+
+.inside-box-4 {
+    border-top: 1px solid rgb(205, 204, 204);
+    padding-top: 9px;
+    color: rgb(241, 240, 240);
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+}
+
+a {
+    text-decoration: none;
+}
+
+.eye {
+    height: 35px;
+    width: 35px;
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+}
+
+.sendOtp {
+    color: #000000;
+    margin-right: -4px;
+    padding: 8px;
+    border-radius: 5px;
+    background-color: rgb(172, 127, 255);
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+}
+
+.circle {
+    height: 40px;
+    width: 40px;
+    background-color: rgb(0, 0, 0);
+    border-radius: 50%;
+    margin: 2px 10px;
+    cursor: pointer;
+}
+
+.circle-2 {
+    color: red;
+    background-color: rgb(234, 234, 234);
+    transition: cubic-bezier(0.175, 0.885, 0.32, 1.275) 500ms;
+}
+
+.circle-2:hover {
+    color: white;
+    background: linear-gradient(to top, rgb(255, 0, 242), red, rgb(254, 151, 168));
+}
+
+.circle-1 {
+    color: rgb(0, 0, 255);
+    background-color: rgb(235, 235, 235);
+    transition: cubic-bezier(0.175, 0.885, 0.32, 1.275) 500ms;
+}
+
+.circle-1:hover {
+    color: white;
+    background: linear-gradient(to top, rgb(0, 13, 255), rgb(126, 115, 255), rgb(29, 1, 142));
+}
+
+.circle-3 {
+    color: rgb(0, 0, 0);
+    background-color: rgb(237, 237, 237);
+    transition: cubic-bezier(0.175, 0.885, 0.32, 1.275) 500ms;
+}
+
+.circle-3:hover {
+    color: white;
+    background: black;
+}
+.field-3{
+    color: white;
+}
+#role{
+    margin-left: 20px;
+    padding: 5px 10px;
+    outline: none;
+    border-radius: 5px;
+    border-color: 2px white solid;
+}
+#afterSignup{
+    display: none;
+
+}

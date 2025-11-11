@@ -1,0 +1,127 @@
+/* Header.css */
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #0066cc;
+  color: white;
+  padding: 12px 18px;
+  border-radius: 8px;
+  gap: 16px;
+}
+
+.brand {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.service-options {
+  display: flex;
+  gap: 22px;
+  align-items: center;
+  flex: 1;
+  justify-content: center;
+}
+
+.service-options h3 {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0;
+  cursor: pointer;
+  font-size: 15px;
+}
+
+.service-options h3 span { 
+  display: inline-block;
+}
+
+.service-options h3:hover {
+  color: #e0e0e0;
+}
+
+/* User/profile area */
+.user-info {
+  position: relative; /* important for absolute dropdown positioning */
+  display: flex;
+  align-items: center;
+}
+
+/* Profile button */
+.profile-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  border: none;
+  color: white;
+  cursor: pointer;
+  padding: 6px 8px;
+  border-radius: 6px;
+  font-size: 15px;
+}
+
+.profile-btn:focus {
+  outline: 2px solid rgba(255,255,255,0.5);
+}
+
+/* Dropdown */
+.dropdown-menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  min-width: 220px;
+  background: #ffffff;
+  color: #222;
+  border-radius: 8px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.18);
+  display: none;
+  flex-direction: column;
+  padding: 6px 0;
+  z-index: 200;
+  transform-origin: top right;
+  transition: opacity 140ms ease, transform 140ms ease;
+  opacity: 0;
+  transform: translateY(-6px) scale(0.99);
+}
+
+/* visible state */
+.dropdown-menu.open {
+  display: flex;
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* menu items */
+.dropdown-menu button {
+  background: none;
+  border: none;
+  text-align: left;
+  padding: 10px 14px;
+  width: 100%;
+  font-size: 14px;
+  cursor: pointer;
+  color: inherit;
+}
+
+.dropdown-menu button:hover {
+  background: #f2f2f2;
+}
+
+/* logout style */
+.logout-btn {
+  border-top: 1px solid #eee;
+  color: #b30000;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* small responsiveness */
+@media (max-width: 640px) {
+  .service-options {
+    display: none; /* hide service options on small screens or adapt UI */
+  }
+}
