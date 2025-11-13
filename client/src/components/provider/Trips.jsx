@@ -47,7 +47,7 @@ const Trips = ({ data = [], selectedDate }) => {
               Price: ₹
               {(l.basePrice * (l.dynamicPricing?.multiplier || 1)).toFixed(2)}
               <br />
-              Rating: {l.providerId?.rating ?? "N/A"}
+             
             </div>
 
             <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>

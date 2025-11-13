@@ -12,7 +12,7 @@ exports.getAvailability = catchAsync(async (req, res, next) => {
   }
 
   const travelDate = new Date(date);
-  travelDate.setHours(0, 0, 0, 0);
+  travelDate.setHours(0, 0, 0, 0); 
 
   // 1️⃣ Check if trip exists
   const trip = await tripModel.Trip.findById(tripId);

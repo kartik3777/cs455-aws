@@ -6,6 +6,7 @@ const dailyAvailabilityModel = require("../models/DailyAvailability");
 const mongoose = require("mongoose");
 
 
+
 exports.createBooking = catchAsync(async (req, res, next) => {
   const session = await mongoose.startSession();
   session.startTransaction();
@@ -35,7 +36,7 @@ exports.createBooking = catchAsync(async (req, res, next) => {
       );
       daily = daily[0];
     }
-
+    const prevDynamicPrice = Math.ceil(daily.dynamicPricing.multiplier * trip.basePrice);
     // 3️⃣ Check seat availability
     const availableSeats = trip.totalSeats - daily.bookedSeats;
     if (availableSeats < seatsBooked) throw new Error("Not enough seats available for this date");
@@ -65,7 +66,7 @@ exports.createBooking = catchAsync(async (req, res, next) => {
         passengerDetails,
         seatNumbers,
         travelDate: travelDateOnly,
-        pricePaid: dynamicPrice * seatsBooked,
+        pricePaid: prevDynamicPrice * seatsBooked,
         paymentStatus: "paid",
         bookingStatus: "active",
       }],
@@ -80,7 +81,7 @@ exports.createBooking = catchAsync(async (req, res, next) => {
     const [payment] = await paymentModel.Payment.create(
       [{
         bookingId: booking._id,
-        amount: dynamicPrice * seatsBooked,
+        amount: prevDynamicPrice * seatsBooked,
         method,
         transactionId: `TXN-${Date.now()}`,
         status: "success",
@@ -98,7 +99,7 @@ exports.createBooking = catchAsync(async (req, res, next) => {
       booking,
       payment,
       availableSeats: trip.totalSeats - daily.bookedSeats,
-      dynamicPricePerSeat: dynamicPrice
+      dynamicPricePerSeat: prevDynamicPrice
     });
 
   } catch (err) {
@@ -107,7 +108,6 @@ exports.createBooking = catchAsync(async (req, res, next) => {
     res.status(400).json({ status: "fail", message: err.message });
   }
 });
-
 /**
  * ✅ Get all bookings for a user
  */

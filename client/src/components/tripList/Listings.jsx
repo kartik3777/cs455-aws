@@ -74,6 +74,9 @@ const Listings = ({ data, selectedDate  }) => {
     setPassengerDetails([]);
     setStage("list");
   };
+  const price = (x) => {
+      return Math.ceil(x.basePrice * x.dynamicPricing.multiplier);
+  }
 
   return (
     <div className="listings-container">
@@ -101,7 +104,7 @@ const Listings = ({ data, selectedDate  }) => {
             Booking for {selectedTrip.source} → {selectedTrip.destination} on{" "}
             {selectedTrip.travelDate}
           </h4>
-          <p>Price per seat: ₹{selectedTrip.basePrice}</p>
+          <p>Price per seat: ₹{price(selectedTrip)}</p>
           <p>Available seats: {selectedTrip.availableSeats}</p>
           <label>Seats:</label>
           <input
@@ -111,7 +114,7 @@ const Listings = ({ data, selectedDate  }) => {
             max={selectedTrip.availableSeats}
             onChange={(e) => setNumSeats(Number(e.target.value))}
           />
-          <p>Total: ₹{selectedTrip.basePrice * numSeats}</p>
+          <p>Total: ₹{price(selectedTrip) * numSeats}</p>
           <button onClick={handleProceedToPassengers}>Next</button>
           <button onClick={resetFlow}>Cancel</button>
         </div>
@@ -161,7 +164,7 @@ const Listings = ({ data, selectedDate  }) => {
             <option value="netbanking">Net Banking</option>
           </select>
           <button onClick={handlePayment}>
-            Pay ₹{selectedTrip.basePrice * numSeats}
+            Pay ₹{price(selectedTrip)* numSeats}
           </button>
           <button onClick={resetFlow}>Cancel</button>
         </div>

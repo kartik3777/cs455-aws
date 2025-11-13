@@ -11,11 +11,6 @@ const tripSchema = new mongoose.Schema({
 
   basePrice: { type: Number, required: true },
 
-  dynamicPricing: {
-    multiplier: { type: Number, default: 1.0 },
-    lastUpdated: { type: Date, default: Date.now }
-  },
-
   totalSeats: { type: Number, required: true },
 
   status: {

@@ -6,7 +6,7 @@ const router = express.Router();
 
 // Only logged-in providers can add trips
 router.post("/add", tripController.addTrip);
-router.get("/date/:date", tripController.getTripsByDateUser);
+router.get("/date/:date", tripController.getTripsByDateUser); //user
 // Get trips of the logged-in provider
 router.get("/provider/:id", tripController.getProviderTrips);
 // router.get("/by-date/:date", tripController.getTripsByDate);

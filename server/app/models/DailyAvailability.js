@@ -11,7 +11,7 @@ const dailyAvailabilitySchema = new mongoose.Schema({
 });
 
 // module.exports = mongoose.model("DailyAvailability", dailyAvailabilitySchema);
-
+dailyAvailabilitySchema.index({ tripId: 1, date: 1 }, { unique: true });
 
 const DailyAvailability = mongoose.model("DailyAvailability", dailyAvailabilitySchema);
 

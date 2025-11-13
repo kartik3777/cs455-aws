@@ -86,9 +86,9 @@ const Header = () => {
           </button>
           {user.role === "customer" && 
           <>
-           <button type="button" onClick={() => handleNavigate('/home/transactions')}>
+           {/* <button type="button" onClick={() => handleNavigate('/home/transactions')}>
             Transaction History
-          </button>
+          </button> */}
           <button type="button" onClick={() => handleNavigate('/home/mybookings')}>
             My Bookings
           </button>

@@ -48,6 +48,7 @@ exports.addTrip = catchAsync(async (req, res, next) => {
   });
 });
 
+
 //for user to get trips of a date
 exports.getTripsByDateUser = catchAsync(async (req, res, next) => {
   const { date } = req.params;
@@ -61,7 +62,7 @@ exports.getTripsByDateUser = catchAsync(async (req, res, next) => {
     .populate("providerId", "companyName rating")
     .lean();
 
-  // 2️⃣ For each trip, get availability for this date using $gte/$lt to avoid hour mismatch
+  // 2️⃣ Fetch availability + dynamic pricing
   const tripsWithAvailability = await Promise.all(
     trips.map(async (trip) => {
       const availability = await dailyAvailabilityModel.DailyAvailability.findOne({
@@ -72,10 +73,22 @@ exports.getTripsByDateUser = catchAsync(async (req, res, next) => {
       const bookedSeats = availability ? availability.bookedSeats : 0;
       const availableSeats = trip.totalSeats - bookedSeats;
 
+      // Extract dynamic pricing if available, else default values
+      const dynamicPricing = availability?.dynamicPricing
+        ? {
+            multiplier: availability.dynamicPricing.multiplier,
+            lastUpdated: availability.dynamicPricing.lastUpdated,
+          }
+        : {
+            multiplier: 1,
+            lastUpdated: null,
+          };
+
       return {
         ...trip,
         bookedSeats,
         availableSeats,
+        dynamicPricing,   // ✔️ added here
         travelDate: queryDate.toISOString().split("T")[0],
       };
     })
@@ -84,7 +97,7 @@ exports.getTripsByDateUser = catchAsync(async (req, res, next) => {
   res.status(200).json({
     success: true,
     results: tripsWithAvailability.length,
-    data: { trips: tripsWithAvailability }, // wrap inside trips
+    data: { trips: tripsWithAvailability },
   });
 });
 
@@ -125,7 +138,7 @@ exports.getProviderTripsByDate = catchAsync(async (req, res, next) => {
 
       // Optional: if provider wants to see daily dynamic multiplier as well
       const dynamicMultiplier =
-        availability?.dynamicPricing?.multiplier ?? trip.dynamicPricing.multiplier ?? 1;
+        availability?.dynamicPricing?.multiplier ? availability?.dynamicPricing?.multiplier : 1;
 
       return {
         ...trip,
@@ -134,7 +147,7 @@ exports.getProviderTripsByDate = catchAsync(async (req, res, next) => {
         travelDate: queryDate.toISOString().split("T")[0],
         dynamicPricing: {
           multiplier: dynamicMultiplier,
-          lastUpdated: availability?.dynamicPricing?.lastUpdated || trip.dynamicPricing.lastUpdated,
+          lastUpdated: availability?.dynamicPricing?.lastUpdated,
         },
       };
     })
