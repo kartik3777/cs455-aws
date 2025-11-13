@@ -53,15 +53,20 @@ const Signup = () => {
     .then(res => {
         console.log("login data");
         console.log(res.data.data);
+         alert("sign up successful!!");
         dispatch(setUser(res.data.data.user));
         dispatch(setToken(res.data.token));
         saveState(store.getState());
         localStorage.setItem('token', res.data.token);
 
-                navigate("/home");
+         if(res.data.data.user.role === "provider"){
+            navigate("/home/provider");
+        }else{
+            navigate("/home");
+        }
     }).catch(err => {
         console.log(err);
-     alert("error occured")
+     alert("error occured") 
     })
     console.log(loginData);
    setLoginData(() => {
